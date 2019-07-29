@@ -16,7 +16,9 @@ pipeline {
                 environment name: 'run_test_only', value: 'yes'
             }
             steps{
+                sh 'pwd'
                 sh 'cd examples/java-calculator && mvn clean integration-test'
+                sh 'pwd'
             }
         }
 
@@ -59,7 +61,7 @@ pipeline {
                      body: "Run ${JOB_NAME}-#${BUILD_NUMBER} succeeded. To get more details, visit the build results page: ${BUILD_URL}.",
                      cc: '',
                      from: 'jenkins-admin@gmail.com',
-                     replyTo: '',
+                     replyTo: 'saikiranask26@gmail.com',
                      subject: "${JOB_NAME} ${BUILD_NUMBER} succeeded",
                      to: env.notification_email)
                      if (env.archive_war =='yes')
@@ -77,7 +79,7 @@ pipeline {
                 body: "Run ${JOB_NAME}-#${BUILD_NUMBER} succeeded. To get more details, visit the build results page: ${BUILD_URL}.",
                  cc: '',
                  from: 'jenkins-admin@gmail.com',
-                 replyTo: '',
+                 replyTo: 'saikiranask26@gmail.com',
                  subject: "${JOB_NAME} ${BUILD_NUMBER} failed",
                  to: env.notification_email)
                  cucumber fileIncludePattern: '**/java-calculator/target/cucumber-report.json', sortingMethod: 'ALPHABETICAL'
